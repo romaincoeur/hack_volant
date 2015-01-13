@@ -1,0 +1,30 @@
+spot:
+    path:     /
+    defaults: { _controller: "HackVolantBundle:Spot:index" }
+
+spot_show:
+    path:     /{id}/show
+    defaults: { _controller: "HackVolantBundle:Spot:show" }
+
+spot_new:
+    path:     /new
+    defaults: { _controller: "HackVolantBundle:Spot:new" }
+
+spot_create:
+    path:     /create
+    defaults: { _controller: "HackVolantBundle:Spot:create" }
+    requirements: { _method: post }
+
+spot_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "HackVolantBundle:Spot:edit" }
+
+spot_update:
+    path:     /{id}/update
+    defaults: { _controller: "HackVolantBundle:Spot:update" }
+    requirements: { _method: post|put }
+
+spot_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "HackVolantBundle:Spot:delete" }
+    requirements: { _method: post|delete }

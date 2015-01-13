@@ -1,0 +1,7 @@
+hack_volant_spot:
+    resource: "@HackVolantBundle/Resources/config/routing/spot.yml"
+    prefix:   /spot
+
+hack_volant_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: HackVolantBundle:Default:index }

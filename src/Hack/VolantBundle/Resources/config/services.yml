@@ -1,0 +1,4 @@
+services:
+    hack_volant.forecastio:
+        class: Hack\VolantBundle\Services\ForecastIO
+        arguments: [%api_key%]

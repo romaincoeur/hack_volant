@@ -1,0 +1,30 @@
+<?php
+
+namespace Hack\VolantBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Spot
+ */
+class Spot
+{
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // YAML GENERATED CODE
+
+    
+}

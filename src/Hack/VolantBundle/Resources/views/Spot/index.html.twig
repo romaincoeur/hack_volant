@@ -1,0 +1,90 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Spot list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+                <th>Address</th>
+                <th>Windspeed</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('spot_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.name }}</td>
+                <td>{{ entity.latitude }}</td>
+                <td>{{ entity.longitude }}</td>
+                <td>{{ entity.address }}</td>
+                <td style="background-color: #66dd66;">{{ entity.windSpeed }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('spot_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('spot_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('spot_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+
+    <div id="map" style="height: 400px;">
+        Veillez patientez pendant le chargement de la carte...
+    </div>
+
+
+
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places&language=fr-FR"></script>
+    <script type="text/javascript">
+        function initialize() {
+            var mapOptions = {
+                center: { lat: 48.8575162, lng: 2.8603553},
+                zoom: 5
+            };
+            var map = new google.maps.Map(document.getElementById('map'),
+                    mapOptions);
+
+            {% for entity in entities %}
+            var postition{{ loop.index }} = new google.maps.LatLng({{ entity.latitude }}, {{ entity.longitude }});
+            var marker{{ loop.index }} = new google.maps.Marker({
+                position: postition{{ loop.index }},
+                map: map
+            })
+            {% endfor %}
+
+            // Geolocation
+            if (navigator.geolocation)
+                var watchId = navigator.geolocation.watchPosition(successCallback,
+                        null,
+                        {enableHighAccuracy:true});
+            else
+                alert("Votre navigateur ne prend pas en compte la géolocalisation HTML5");
+
+            function successCallback(position){
+                map.panTo(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
+                map.setZoom(13);
+            }
+
+        }
+        google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+    {% endblock %}

@@ -1,0 +1,27 @@
+Hack\VolantBundle\Entity\Spot:
+    type: entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+            nullable: true
+        latitude:
+            type: float
+            nullable: true
+        longitude:
+            type: float
+            nullable: true
+        address:
+            type: string
+            length: 255
+        windSpeed:
+            type: float
+            nullable: true
+    lifecycleCallbacks: {  }
